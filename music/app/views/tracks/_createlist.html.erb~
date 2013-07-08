@@ -1,0 +1,5 @@
+<div id="createlist">
+<%= form_tag(track , :method => :get, :remote=>true) do %>
+	<%= submit_tag("create playlist") %>
+<% end %>
+</div>

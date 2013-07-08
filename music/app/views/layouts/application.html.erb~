@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Playlist App" %></title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+	<script>
+		//Load player api asynchronously.
+			var tag = document.createElement('script');
+			tag.src = "https://www.youtube.com/iframe_api";
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			var done = false;
+			var player;
+			function onYouTubeIframeAPIReady() {
+				player = new YT.Player('player', {
+				  height: '200',
+				  width: '350',
+				  videoId: 'gpoNsY2evRo',
+				  playerVars:{ 'autoplay': 1, 'controls': 1 },
+				  events: {
+					'onReady': onPlayerReady,
+					'onStateChange': onPlayerStateChange
+				  }
+				});
+			}
+			
+			function onPlayerReady(evt) {
+				//evt.target.playVideo();
+			}
+			function onPlayerStateChange(evt) {
+				if (evt.data == YT.PlayerState.PLAYING && !done) {
+					setTimeout(stopVideo, 6000);
+					done = true;
+				}
+			}
+			function stopVideo() {
+				player.stopVideo();
+			}
+			
+			function generatePlaylist(list){
+				//var list = <%= raw (Track.pluck(:video_id)).to_json %>;
+				player.loadPlaylist(list);
+				alert(list);
+			}
+			
+	</script>
+  </head>
+  <body>
+    <div id="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end %>
+      <%= content_tag :h1, yield(:title) if show_title? %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

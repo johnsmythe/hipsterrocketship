@@ -1,0 +1,23 @@
+<h1>Playlist</h1>
+
+
+<%= form_for @track,:url=>{:action=>'create'},:remote=>true do |f| %>
+	<%= f.error_messages %>
+	<p>
+		<%= f.text_field :youtube_url,:class=>"search_bar",:required=>true %>
+		<%= f.submit 'Add' %>
+	</p>
+<% end %>
+
+<hr />
+<div id = "player"></div>
+<div id="list_of_tracks">
+<br>
+	<% @tracks.each do |track| %>
+			<%= render track %>
+	<% end %>
+	<%= render partial: "createlist" %>
+</div>
+<!--<button onclick="generatePlaylist()">Create Playlist</button>-->
+<!--<button onclick='generatePlaylist(<%= raw (Track.pluck(:video_id)).to_json %>)'>Create Playlist</button>-->
+

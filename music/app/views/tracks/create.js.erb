@@ -1,0 +1,6 @@
+<%if @track.valid? %>
+	  $('<%= j(render(@track)) %>').hide().appendTo("#list_of_tracks").fadeIn();
+	  $("search_bar")[0].reset(); 
+<% else %>
+  alert('Something Went Wrong');
+<% end %>

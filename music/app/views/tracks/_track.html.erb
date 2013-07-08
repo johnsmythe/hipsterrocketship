@@ -1,0 +1,6 @@
+<div id="track_<%= track.id %>">
+<%= image_tag(track.thumbnail_url, :height => "40") %><%=track.title%>
+<%= form_tag(track , :method => :delete, :remote=>true) do %>
+				<%= image_submit_tag("remove.png", :value => :delete, :trackscontroller=>:destroy, :class => "remove_pos") %>
+<% end %>
+</div>
