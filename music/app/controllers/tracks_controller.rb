@@ -56,8 +56,10 @@ def destroy
 	@track.destroy
 end
 
-def show
+def retrieve
+	puts "in this action"
 	@tracklist = Track.pluck(:video_id)
+	puts "done this action"
 end
 
 end

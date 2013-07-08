@@ -1,6 +1,18 @@
 Music::Application.routes.draw do
 
-   resources :tracks
+   resources :tracks 
+	#do
+	#collection do
+#		get 'retrieve'
+#	end
+ #  end
+	
+   #controller :tracks do
+	#get 'tracks/retrieve' => :retrieve
+   #end
+
+	
+  match '/retrieve' => 'tracks#retrieve', :as => 'retrieve'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
